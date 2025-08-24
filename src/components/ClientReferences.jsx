@@ -18,7 +18,6 @@ export default function ClientReferences() {
   return (
     <section className="w-full py-16 bg-gray-50">
       <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
-        
         {/* Video */}
         <div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
@@ -27,7 +26,7 @@ export default function ClientReferences() {
           <div className="w-full relative pb-[56.25%] rounded-xl overflow-hidden shadow-xl">
             <iframe
               className="absolute top-0 left-0 w-full h-full"
-              src="https://www.youtube.com/embed/d9xTYpHp4gc?si=2jtWcE51arA4Yleq"
+              src="https://www.loom.com/embed/1a69848252d64696bfa4f06ea148233d"
               title="Owner's Introduction"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -43,7 +42,8 @@ export default function ClientReferences() {
             Hear From Our Clients
           </h2>
           <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-            We believe in transparency. You can contact our past clients to hear about their experience working with us.
+            We believe in transparency. You can contact our past clients to hear
+            about their experience working with us.
           </p>
           <ul className="space-y-5">
             {clients.map((client, idx) => (
@@ -67,7 +67,6 @@ export default function ClientReferences() {
             ))}
           </ul>
         </div>
-
       </div>
     </section>
   );

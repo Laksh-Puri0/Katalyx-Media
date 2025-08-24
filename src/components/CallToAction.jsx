@@ -35,7 +35,7 @@ export default function CallToAction() {
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight"
         >
           Ready to get your{" "}
-          <span className="text-cyan-400">10 qualified appointments?</span>
+          <span className="text-cyan-400">10 qualified phone consultations?</span>
         </motion.h2>
 
         <motion.p
@@ -44,9 +44,8 @@ export default function CallToAction() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="text-base sm:text-lg text-gray-300 mb-10 max-w-2xl mx-auto"
         >
-          Take advantage of our{" "}
-          <span className="font-semibold">30-day guarantee</span> and start
-          booking high-quality remodeling leads today.
+          Take advantage of our affordable,{" "}
+          <span className="font-semibold">personalized & lead exclusive SMS strategy</span> to start getting meetings within 3 days.
         </motion.p>
 
         <motion.div

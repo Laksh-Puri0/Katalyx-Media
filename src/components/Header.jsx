@@ -24,7 +24,6 @@ export default function HeaderHero() {
   const navLinks = [
     { label: "About", id: "about" },
     { label: "How it Works", id: "how-it-works" },
-    { label: "Guarantee", id: "guarantee" },
     { label: "FAQ", id: "faq" },
   ];
 

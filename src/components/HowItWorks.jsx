@@ -43,7 +43,7 @@ export default function HowItWorks() {
             How It <span className="text-primary">Works</span>
           </h2>
           <p className="text-lg text-gray-600">
-            We make lead generation simple — just follow these 4 steps and watch your calendar fill up.
+          We run personalized SMS campaigns in your service area with an attractive offer to gauge interest.
           </p>
         </motion.div>
 
