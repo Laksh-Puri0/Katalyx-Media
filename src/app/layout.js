@@ -21,17 +21,16 @@ export const metadata = {
     "digital marketing agency Canada, Canadian marketing services, lead generation Canada, online business growth, SEO agency Canada, Katalyx Media, social media marketing Canada, PPC advertising Canada, digital strategy for businesses",
   authors: [
     { name: "Laksh", role: "Founder & CEO" },
-    { name: "Don Agrahari", role: "Head Director" },
   ],
   openGraph: {
     title: "Katalyx Media | Digital Marketing Agency in Canada",
     description:
       "We help Canadian businesses connect with real customers, generate consistent leads, and grow online with proven marketing systems.",
-    url: "https://yourwebsite.com",
+    url: "https://www.katalyxmedia.ca/",
     siteName: "Katalyx Media",
     images: [
       {
-        url: "https://yourwebsite.com/Images/og-image.jpg",
+        url: "https://www.katalyxmedia.ca/Images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Katalyx Media - Digital Marketing Agency in Canada",
@@ -45,7 +44,7 @@ export const metadata = {
     title: "Katalyx Media | Canadian Digital Marketing Agency",
     description:
       "Helping Canadian businesses generate more leads and scale with proven digital marketing strategies.",
-    images: ["https://yourwebsite.com/Images/og-image.jpg"],
+    images: ["https://www.katalyxmedia.ca/Images/og-image.jpg"],
   },
   icons: {
     icon: "/favicon/favicon.ico",
