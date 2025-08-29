@@ -6,8 +6,8 @@ import { Megaphone, CheckCircle, Calendar, Handshake } from "lucide-react";
 const steps = [
   {
     icon: Megaphone,
-    title: "We Advertise for You",
-    description: "We run targeted ads to attract homeowners who are ready to start their renovation projects.",
+    title: "We Generate Leads",
+    description: "We make customized SMS flows targeting your ideal audience to collect as many leads possible with an incentive-based offer.",
   },
   {
     icon: CheckCircle,

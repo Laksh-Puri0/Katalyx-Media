@@ -14,19 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Katalyx Media | Remodeler Marketing Agency for High-Quality Leads",
+  title: "Katalyx Media | Digital Marketing Agency in Canada",
   description:
-    "Katalyx Media helps remodelers and construction companies consistently book high-quality projects through proven marketing strategies, modern tools, and systems that deliver real results.",
+    "Katalyx Media helps Canadian businesses generate more leads, grow their online presence, and scale with proven digital marketing strategies, tools, and systems that deliver measurable results.",
   keywords:
-    "remodeler marketing agency, construction marketing, home renovation leads, contractor marketing, lead generation for remodelers, remodeling business growth, Katalyx Media, home improvement marketing, high-quality construction leads, renovation marketing agency",
+    "digital marketing agency Canada, Canadian marketing services, lead generation Canada, online business growth, SEO agency Canada, Katalyx Media, social media marketing Canada, PPC advertising Canada, digital strategy for businesses",
   authors: [
     { name: "Laksh", role: "Founder & CEO" },
     { name: "Don Agrahari", role: "Head Director" },
   ],
   openGraph: {
-    title: "Katalyx Media | Remodeler Marketing Agency for High-Quality Leads",
+    title: "Katalyx Media | Digital Marketing Agency in Canada",
     description:
-      "We connect remodelers and construction businesses with real homeowners ready to move forward. Proven systems, real results.",
+      "We help Canadian businesses connect with real customers, generate consistent leads, and grow online with proven marketing systems.",
     url: "https://yourwebsite.com",
     siteName: "Katalyx Media",
     images: [
@@ -34,17 +34,17 @@ export const metadata = {
         url: "https://yourwebsite.com/Images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Katalyx Media - Marketing Agency for Remodelers",
+        alt: "Katalyx Media - Digital Marketing Agency in Canada",
       },
     ],
-    locale: "en_US",
+    locale: "en_CA",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Katalyx Media | Remodeler Marketing Agency",
+    title: "Katalyx Media | Canadian Digital Marketing Agency",
     description:
-      "Helping remodelers and construction companies consistently book more high-quality projects through proven marketing systems.",
+      "Helping Canadian businesses generate more leads and scale with proven digital marketing strategies.",
     images: ["https://yourwebsite.com/Images/og-image.jpg"],
   },
   icons: {
@@ -56,7 +56,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="" />
+        <link
+          rel="preconnect"
+          href="https://assets.calendly.com"
+          crossOrigin=""
+        />
         <link rel="preconnect" href="https://calendly.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.youtube.com" crossOrigin="" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
