@@ -27,7 +27,7 @@ export const metadata = {
     description:
       "We help Canadian businesses connect with real customers, generate consistent leads, and grow online with proven marketing systems.",
     url: "https://www.katalyxmedia.ca/",
-    siteName: "Katalyx Media",
+    siteName: "Katalyx Media", 
     images: [
       {
         url: "https://www.katalyxmedia.ca/Images/og-image.jpg",
