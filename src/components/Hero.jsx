@@ -72,11 +72,12 @@ export default function Hero() {
         <motion.div {...fadeInLeft} className="space-y-6 text-center lg:text-left py-6 lg:py-0">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
             Get{" "}
-            <span className="text-primary">10 Phone Consultations</span> in 30 Days –
-            Spending $0/Month On Ads.
+            <span className="text-primary">10 Qualified Quotation Appointments</span> in 30 Days –
+            or You Don’t Pay.
           </h1>
           <p className="text-lg text-gray-200 max-w-md mx-auto lg:mx-0">
-          We connect you with qualified homeowners and book exclusive consultations for your local business.
+            We find, qualify, and book exclusive homeowner consultations for your remodeling
+            business.
           </p>
           <motion.a
             href="#booking"
