@@ -34,7 +34,7 @@ export default function GallerySection() {
       "/images/detailing6.jpg",
       "/images/detailing7.jpg",
       "/images/detailing8.jpg",
-    ],
+    ], 
     []
   );
 
