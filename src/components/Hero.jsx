@@ -1,110 +1,214 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import Header from "@/components/Header";
-import { motion } from "framer-motion";
+
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import HeaderHero from "@/components/Header";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
-const fadeInLeft = {
-  initial: { x: -50, opacity: 0 },
-  whileInView: { x: 0, opacity: 1 },
-  transition: { duration: 0.8, ease: "easeOut" },
-  viewport: { once: true },
-};
-
-const fadeInRight = {
-  initial: { x: 50, opacity: 0 },
-  whileInView: { x: 0, opacity: 1 },
-  transition: { duration: 0.8, ease: "easeOut" },
-  viewport: { once: true },
-};
-
 export default function Hero() {
-  const bookingRef = useRef(null);
-  const [loadCalendly, setLoadCalendly] = useState(false);
+  const bookingRef = useRef(null); // ✅ no TS generic in .jsx
+  const calendlyParentRef = useRef(null); // where the iframe will mount
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
-  // Lazy load Calendly script only when booking section enters viewport
+  // ---- motion variants ----
+  const fadeInLeft = useMemo(
+    () =>
+      prefersReducedMotion
+        ? {
+            initial: { opacity: 0 },
+            whileInView: { opacity: 1 },
+            transition: { duration: 0.2 },
+            viewport: { once: true },
+          }
+        : {
+            initial: { x: -50, opacity: 0 },
+            whileInView: { x: 0, opacity: 1 },
+            transition: { duration: 0.8, ease: "easeOut" },
+            viewport: { once: true },
+          },
+    [prefersReducedMotion]
+  );
+  const fadeInRight = useMemo(
+    () =>
+      prefersReducedMotion
+        ? {
+            initial: { opacity: 0 },
+            whileInView: { opacity: 1 },
+            transition: { duration: 0.2 },
+            viewport: { once: true },
+          }
+        : {
+            initial: { x: 50, opacity: 0 },
+            whileInView: { x: 0, opacity: 1 },
+            transition: { duration: 0.8, ease: "easeOut" },
+            viewport: { once: true },
+          },
+    [prefersReducedMotion]
+  );
+
+  // ---- Lazy trigger when the card is near the viewport ----
   useEffect(() => {
     if (!bookingRef.current) return;
-
-    const observer = new IntersectionObserver(
+    const el = bookingRef.current;
+    const io = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          setLoadCalendly(true);
-          observer.disconnect();
+        if (entries[0]?.isIntersecting) {
+          setShouldLoad(true);
+          io.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15, rootMargin: "300px 0px" }
     );
-
-    observer.observe(bookingRef.current);
-    return () => observer.disconnect();
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
+  // ---- Ensure the script exists, then (re)init the widget every time shouldLoad flips true ----
   useEffect(() => {
-    if (loadCalendly) {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      document.body.appendChild(script);
-      return () => document.body.removeChild(script);
+    if (!shouldLoad || !calendlyParentRef.current) return;
+
+    const WIDGET_URL = "https://calendly.com/puri-business7/15min";
+
+    const init = () => {
+      // Clear previous iframe(s) to avoid duplicates on HMR / re-entry
+      calendlyParentRef.current.innerHTML = "";
+      // Calendly API present? init inline widget.
+      if (window.Calendly?.initInlineWidget) {
+        window.Calendly.initInlineWidget({
+          url: WIDGET_URL,
+          parentElement: calendlyParentRef.current,
+          // prefill / utm options could be added here if needed
+        });
+      }
+    };
+
+    // If the script is already on the page, init immediately.
+    const existing = document.querySelector(
+      'script[src*="assets.calendly.com/assets/external/widget.js"]'
+    );
+    if (existing) {
+      init();
+      return;
     }
-  }, [loadCalendly]);
+
+    // Otherwise, add it and init on load.
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = init;
+    document.body.appendChild(script);
+
+    // keep the script for subsequent navigations
+  }, [shouldLoad]);
+
+  const scrollToBooking = useCallback((e) => {
+    const href = (e.currentTarget.getAttribute("href") || "").replace("#", "");
+    const target = href && document.getElementById(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   return (
-    <div id="/" className="relative min-h-screen py-5">
-      {/* Background image */}
-      <div className="absolute inset-0 -z-10">
+    <div
+      id="hero"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden"
+    >
+      {/* BG */}
+      <div aria-hidden className="absolute inset-0 -z-10">
         <Image
-          src="/Kitchen.webp"
-          alt="Kitchen Background"
+          src="/Images/new.jpg"
+          alt=""
           fill
           priority
-          quality={80}
+          sizes="100vw"
+          quality={85}
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(0,0,0,0.65),transparent_80%),linear-gradient(to_right,rgba(0,0,0,0.75),rgba(0,0,0,0.4),rgba(127,29,29,0.45))]" />
       </div>
 
-      {/* Main content */}
-      <Header />
-      <section className="container mx-auto px-4 md:px-8 py-16 md:py-20 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        {/* Left Content */}
-        <motion.div {...fadeInLeft} className="space-y-6 text-center lg:text-left py-6 lg:py-0">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
-            Get{" "}
-            <span className="text-primary">10 Qualified Quotation Appointments</span> in 30 Days –
-            or You Don’t Pay.
+      <HeaderHero />
+
+      <section className="container mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 py-28 md:grid-cols-2 md:px-8 lg:px-10 mt-10">
+        {/* Left */}
+        <motion.div
+          {...fadeInLeft}
+          className="space-y-6 text-center text-white md:text-left"
+        >
+          <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
+            Experience <span className="text-red-500">Royal-Level Shine</span> —
+            Premium Auto Detailing You Deserve
           </h1>
-          <p className="text-lg text-gray-200 max-w-md mx-auto lg:mx-0">
-            We find, qualify, and book exclusive homeowner consultations for your remodeling
-            business.
+          <p className="mx-auto max-w-xl text-base text-gray-200 sm:text-lg md:mx-0">
+            At{" "}
+            <span className="font-semibold text-white">
+              Royal Touch Auto Detailing
+            </span>
+            , we revive your car with a deep clean, polish, and finish that
+            feels brand new. Book your appointment today and give your car the
+            royal treatment.
           </p>
-          <motion.a
-            href="#booking"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-block px-8 py-4 rounded-full bg-primary text-white text-lg font-semibold shadow-lg transition-transform"
-          >
-            Start My 30-Day Guarantee
-          </motion.a>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4 md:items-start">
+            <a
+              href="#booking"
+              onClick={scrollToBooking}
+              className="inline-flex items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-300 md:text-base"
+            >
+              Book Your Appointment
+            </a>
+            <a
+              href="tel:+16479322928"
+              className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 md:text-base"
+            >
+              📞 Call: +1 (647) 932-2928
+            </a>
+          </div>
         </motion.div>
 
-        {/* Right Booking Calendly Embed */}
-        <motion.div {...fadeInRight} ref={bookingRef} id="booking" className="relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary to-primary/30 blur-3xl rounded-2xl opacity-20" />
-          <div className="relative z-10 bg-white rounded-2xl shadow-xl lg:my-8 p-4 md:p-6">
-            <h3 className="text-xl font-bold mb-4 text-center text-gray-800">
-              Book Your Free Consultation
-            </h3>
-            {loadCalendly ? (
-              <div
-                className="calendly-inline-widget"
-                data-url="https://calendly.com/setterkatalyx?hide_event_type_details=1&primary_color=00b7c3"
-                style={{ minWidth: "320px", height: "500px" }}
-              />
-            ) : (
-              <div className="flex items-center justify-center h-[500px] text-gray-500">
-                Loading calendar...
+        {/* Right: Calendly */}
+        <motion.div
+          {...fadeInRight}
+          id="booking"
+          ref={bookingRef}
+          className="relative"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-tr from-red-500/40 to-red-700/40 blur-2xl"
+          />
+          <div className="relative rounded-2xl border border-white/10 bg-white/90 p-4 shadow-2xl backdrop-blur-md sm:p-5 md:p-6">
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-900 sm:text-2xl">
+              Schedule Your Detailing Session
+            </h2>
+
+            {/* Calendly mounts here */}
+            <div
+              ref={calendlyParentRef}
+              className="w-full"
+              style={{ minWidth: 280, height: 520 }}
+              aria-busy={!shouldLoad}
+              aria-live="polite"
+            />
+
+            {/* Skeleton while we wait to load/initialize */}
+            {!shouldLoad && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl">
+                <div className="w-full max-w-sm animate-pulse space-y-3 px-6">
+                  <div className="h-4 w-3/5 rounded bg-gray-300/80" />
+                  <div className="h-3 w-11/12 rounded bg-gray-300/60" />
+                  <div className="h-3 w-10/12 rounded bg-gray-300/60" />
+                  <div className="h-40 w-full rounded-lg bg-gray-300/70" />
+                  <div className="h-10 w-32 rounded-full bg-gray-300/80" />
+                </div>
               </div>
             )}
           </div>
