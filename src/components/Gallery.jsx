@@ -26,14 +26,14 @@ export default function GallerySection() {
 
   const images = useMemo(
     () => [
-      "/images/detailing1.jpg",
-      "/images/detailing2.jpg",
-      "/images/detailing3.jpg",
-      "/images/detailing4.jpg",
-      "/images/detailing5.jpg",
-      "/images/detailing6.jpg",
-      "/images/detailing7.jpg",
-      "/images/detailing8.jpg",
+      "/Images/detailing1.jpg",
+      "/Images/detailing2.jpg",
+      "/Images/detailing3.jpg",
+      "/Images/detailing4.jpg",
+      "/Images/detailing5.jpg",
+      "/Images/detailing6.jpg",
+      "/Images/detailing7.jpg",
+      "/Images/detailing8.jpg",
     ], 
     []
   );
