@@ -102,6 +102,7 @@ export default function Services() {
         image: "/Images/service3.jpg",
         features: [
           "Deep shampoo & steam clean",
+          "Deep Stain Removal",
           "Dash & console detail",
           "Windows & mirrors crystal-clear",
           "Hand wash & dry",
@@ -118,6 +119,7 @@ export default function Services() {
           "Cabin restoration with precision cleaning, odor reduction, and conditioning for a like-new feel.",
         image: "/Images/service1.jpg",
         features: [
+          "Deep Stain Removal",
           "Vacuuming floors/mats",
           "Shampoo seats & carpets",
           "Leather/vinyl clean & condition",
