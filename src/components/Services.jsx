@@ -241,7 +241,7 @@ export default function Services() {
                   <p className="mt-3 text-slate-600">{service.description}</p>
 
                   <ul
-                    className="mt-5 space-y-2.5"
+                    className="mt-5 mb-4 space-y-2.5"
                     aria-label={`${service.title} features`}
                   >
                     {service.features.map((f) => (

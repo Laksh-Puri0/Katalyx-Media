@@ -1,14 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-// import Hero from "@/components/Hero"; // Load instantly
-
-// Lazy-loaded sections with placeholders
-// const About = dynamic(() => import("@/components/About"), {
-//   ssr: false,
-//   loading: () => <SectionSkeleton height={500} />,
-// });
-const Banner = dynamic(() => import("@/components/BannerOffer"), {
+const Banner = dynamic(() => import("@/components/Banner"), {
   ssr: false,
   loading: () => <SectionSkeleton height={400} />,
 });
@@ -23,18 +16,6 @@ const Gallery = dynamic(() => import("@/components/Gallery"), {
 const Reviews = dynamic(() => import("@/components/Reviews"), {
   ssr: false,
   loading: () => <SectionSkeleton height={400} />,
-});
-const ReviewsProof = dynamic(() => import("@/components/ReviewsProof"), {
-  ssr: false,
-  loading: () => <SectionSkeleton height={300} />,
-});
-const CallToAction = dynamic(() => import("@/components/CallToAction"), {
-  ssr: false,
-  loading: () => <SectionSkeleton height={400} />,
-});
-const Footer = dynamic(() => import("@/components/Footer"), {
-  ssr: false,
-  loading: () => <SectionSkeleton height={200} />,
 });
 
 // Simple placeholder skeleton
@@ -55,15 +36,10 @@ function SectionSkeleton({ height }) {
 export default function Page() {
   return (
     <div>
-      {/* <Hero /> */}
-      <Banner/>
+      <Banner />
       <Services />
       <Reviews />
-      {/* <About /> */}
-      {/* <ReviewsProof /> */}
       <Gallery />
-      {/* <CallToAction /> */}
-      {/* <Footer /> */}
     </div>
   );
 }

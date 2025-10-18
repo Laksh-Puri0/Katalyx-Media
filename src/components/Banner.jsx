@@ -83,42 +83,32 @@ export default function BannerOffer({ seconds = 600 }) {
           </div>
 
           {/* Center: Countdown block */}
-          <div className="w-full max-w-sm sm:max-w-none sm:w-auto">
+          <div className="w-full sm:w-auto">
             <div
-              className="mx-auto grid w-[16rem] grid-cols-3 gap-2 sm:mx-0"
+              className="mx-auto flex items-center justify-center gap-4 sm:gap-6"
               role="timer"
               aria-live="polite"
               aria-label="Time left on offer"
             >
               {/* Minutes */}
-              <div className="flex flex-col items-center rounded-xl bg-white/15 px-3 py-2">
-                <span className="text-lg font-bold tabular-nums sm:text-xl">
+              <div className="flex flex-col items-center rounded-xl bg-white/15 px-4 py-2 sm:px-5 sm:py-3">
+                <span className="text-lg font-bold tabular-nums sm:text-2xl">
                   {mm}
                 </span>
-                <span className="text-[10px] uppercase tracking-wide text-white/80">
+                <span className="text-[10px] uppercase tracking-wide text-white/80 sm:text-xs">
                   Minutes
                 </span>
               </div>
-              {/* Separator + Progress */}
-              <div className="flex flex-col items-center justify-center gap-1">
-                <span className="text-xl font-extrabold">:</span>
-                <div className="h-1.5 w-24 overflow-hidden rounded-full bg-white/25">
-                  <div
-                    className="h-full bg-white"
-                    style={{
-                      width: `${Math.max(0, (timeLeft / total) * 100)}%`,
-                      transition: "width 1s linear",
-                    }}
-                    aria-hidden
-                  />
-                </div>
-              </div>
+
+              {/* Separator */}
+              <span className="text-xl font-extrabold sm:text-3xl">:</span>
+
               {/* Seconds */}
-              <div className="flex flex-col items-center rounded-xl bg-white/15 px-3 py-2">
-                <span className="text-lg font-bold tabular-nums sm:text-xl">
+              <div className="flex flex-col items-center rounded-xl bg-white/15 px-4 py-2 sm:px-5 sm:py-3">
+                <span className="text-lg font-bold tabular-nums sm:text-2xl">
                   {ss}
                 </span>
-                <span className="text-[10px] uppercase tracking-wide text-white/80">
+                <span className="text-[10px] uppercase tracking-wide text-white/80 sm:text-xs">
                   Seconds
                 </span>
               </div>
