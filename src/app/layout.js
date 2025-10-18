@@ -12,13 +12,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-/**
- * SEO-first metadata for Royal Touch Auto Detailing (Toronto, Canada)
- * - Strong, keyword-rich titles & descriptions
- * - OG/Twitter cards
- * - Canonical, locale, robots, theme-color
- * - JSON-LD for LocalBusiness (Auto detailing), + WebSite
- */
 const SITE_URL = "https://www.royaltouchautodetailing.ca";
 
 export const metadata = {
