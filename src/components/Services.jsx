@@ -1,25 +1,34 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 /* ---------- Tiny inline check icon (no extra deps) ---------- */
 const Check = ({ className = "h-4 w-4" }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M20 6L9 17l-5-5"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 /* ---------- Countdown hook (10-minute promo) ---------- */
 function useCountdown(totalSeconds) {
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
-
   useEffect(() => {
     if (timeLeft <= 0) return;
-    const id = setInterval(() => {
-      setTimeLeft((s) => (s > 0 ? s - 1 : 0));
-    }, 1000);
+    const id = setInterval(() => setTimeLeft((s) => (s > 0 ? s - 1 : 0)), 1000);
     return () => clearInterval(id);
   }, [timeLeft]);
 
@@ -68,13 +77,18 @@ const cardVariants = {
   }),
 };
 
+/* ---------- Reusable class to pin CTAs to card bottoms ---------- */
+/* Tailwind does the heavy lifting via mt-auto; this class name helps you target it if you ever add custom CSS */
+const CTA_BOTTOM_CLASS = "cta-bottom mt-auto";
+
 export default function Services() {
   const prefersReducedMotion = useReducedMotion();
-  // ✅ FIX: no TypeScript generics in a .jsx file
   const captureRef = useRef(null);
 
   // 10 minutes = 600 seconds
-  const { timeLeft, label, total } = useCountdown(600);
+  const { timeLeft, label } = useCountdown(600);
+
+  const bookingUrl = "https://calendly.com/puri-business7/15min";
 
   const services = useMemo(
     () => [
@@ -135,51 +149,30 @@ export default function Services() {
 
   const handleScreenshot = useCallback(async () => {
     if (!captureRef.current) return;
-    await takeScreenshot(captureRef.current, `royal-services-${Date.now()}.png`);
+    await takeScreenshot(
+      captureRef.current,
+      `royal-services-${Date.now()}.png`
+    );
   }, []);
 
   return (
-    <section id="services" className="relative overflow-hidden bg-white py-16 sm:py-20">
+    <section
+      id="services"
+      className="relative overflow-hidden bg-white py-16 sm:py-20"
+    >
       {/* soft red corners */}
-      <div aria-hidden className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-100/60 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-red-100/60 blur-3xl" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-100/60 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-red-100/60 blur-3xl"
+      />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
-        {/* ----- Limited-time banner with countdown ----- */}
-        <div
-          className={[
-            "mb-6 overflow-hidden rounded-2xl border border-red-200/60",
-            "bg-gradient-to-r from-red-600 via-red-500 to-rose-500 text-white",
-            prefersReducedMotion ? "" : "shadow-[0_10px_30px_-12px_rgba(225,29,72,0.55)]",
-          ].join(" ")}
-        >
-          <div className="flex flex-col items-center gap-3 px-4 py-4 sm:flex-row sm:justify-between sm:px-6">
-            <p className="text-center text-sm sm:text-base">
-              <span className="font-semibold">Flash Offer:</span> 30% OFF for the next{" "}
-              <span className="font-semibold">10 minutes</span>. Prices below are discounted.
-            </p>
-            <div
-              className="flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold tracking-widest"
-              role="timer"
-              aria-live="polite"
-            >
-              ⏳ <span aria-label="time left">{label}</span>
-            </div>
-          </div>
-          {/* progress bar */}
-          <div className="h-1 w-full bg-white/20" aria-hidden>
-            <div
-              className="h-full bg-white/70"
-              style={{
-                width: `${Math.max(0, (timeLeft / total) * 100)}%`,
-                transition: "width 1s linear",
-              }}
-            />
-          </div>
-        </div>
-
-        {/* ----- Heading row + screenshot action (excluded from capture) ----- */}
-        <div className="mb-6 flex flex-col-reverse items-center justify-between gap-3 sm:flex-row">
+        {/* ----- Heading row ----- */}
+        <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <motion.div
             variants={sectionVariants}
             initial="hidden"
@@ -191,19 +184,10 @@ export default function Services() {
               Our <span className="text-red-600">Royal Services</span>
             </h2>
             <p className="mt-2 max-w-2xl text-slate-600">
-              Choose a package tailored to your needs—crafted with care, precision, and the Royal Touch promise.
+              Choose a package tailored to your needs—crafted with care,
+              precision, and the Royal Touch promise.
             </p>
           </motion.div>
-
-          {/* <button
-            data-hide-in-screenshot
-            onClick={handleScreenshot}
-            className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
-            aria-label="Download a screenshot of the offer and services"
-            title="Download a screenshot of the offer and services"
-          >
-            📸 Save Offer Screenshot
-          </button> */}
         </div>
 
         {/* ----- Screenshot capture area ----- */}
@@ -229,17 +213,26 @@ export default function Services() {
                     className="object-cover transition duration-500 group-hover:scale-105"
                     priority={false}
                   />
-                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/0 to-transparent" />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/0 to-transparent"
+                  />
                 </div>
 
                 {/* Content */}
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
-                  <h3 className="text-lg font-bold text-slate-900 sm:text-xl">{service.title}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
+                    {service.title}
+                  </h3>
 
                   {/* Price row */}
                   <div className="mt-2 flex flex-wrap items-center gap-2 sm:gap-3">
-                    <span className="text-3xl font-extrabold text-red-600">{service.priceNew}</span>
-                    <span className="text-sm font-semibold text-slate-400 line-through">{service.priceOld}</span>
+                    <span className="text-3xl font-extrabold text-red-600">
+                      {service.priceNew}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-400 line-through">
+                      {service.priceOld}
+                    </span>
                     <span className="rounded-full bg-red-50 px-3 py-1 text-[11px] font-semibold text-red-700 sm:text-xs">
                       {service.time}
                     </span>
@@ -247,7 +240,10 @@ export default function Services() {
 
                   <p className="mt-3 text-slate-600">{service.description}</p>
 
-                  <ul className="mt-5 space-y-2.5" aria-label={`${service.title} features`}>
+                  <ul
+                    className="mt-5 space-y-2.5"
+                    aria-label={`${service.title} features`}
+                  >
                     {service.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5">
                         <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-600/10 text-red-600">
@@ -258,13 +254,16 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  <div className="mt-6">
+                  {/* CTA pinned at the bottom */}
+                  <div className={CTA_BOTTOM_CLASS}>
                     <motion.a
-                      href="#booking"
+                      href={bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
                       whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                       className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      aria-label={`Book ${service.title}`}
+                      aria-label={`Book ${service.title} (opens Calendly in a new tab)`}
                     >
                       Book Now
                     </motion.a>

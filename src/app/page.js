@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import Hero from "@/components/Hero"; // Load instantly
+// import Hero from "@/components/Hero"; // Load instantly
 
 // Lazy-loaded sections with placeholders
-const About = dynamic(() => import("@/components/About"), {
+// const About = dynamic(() => import("@/components/About"), {
+//   ssr: false,
+//   loading: () => <SectionSkeleton height={500} />,
+// });
+const Banner = dynamic(() => import("@/components/BannerOffer"), {
   ssr: false,
-  loading: () => <SectionSkeleton height={500} />,
+  loading: () => <SectionSkeleton height={400} />,
 });
 const Services = dynamic(() => import("@/components/Services"), {
   ssr: false,
@@ -51,14 +55,15 @@ function SectionSkeleton({ height }) {
 export default function Page() {
   return (
     <div>
-      <Hero />
+      {/* <Hero /> */}
+      <Banner/>
       <Services />
       <Reviews />
-      <About />
-      <ReviewsProof />
+      {/* <About /> */}
+      {/* <ReviewsProof /> */}
       <Gallery />
-      <CallToAction />
-      <Footer />
+      {/* <CallToAction /> */}
+      {/* <Footer /> */}
     </div>
   );
 }
