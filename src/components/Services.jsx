@@ -10,7 +10,7 @@ import React, {
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
-/* ---------- Tiny inline check icon (no extra deps) ---------- */
+/* ---------- Tiny inline check icon ---------- */
 const Check = ({ className = "h-4 w-4" }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
     <path
@@ -23,7 +23,7 @@ const Check = ({ className = "h-4 w-4" }) => (
   </svg>
 );
 
-/* ---------- Countdown hook (10-minute promo) ---------- */
+/* ---------- Countdown hook ---------- */
 function useCountdown(totalSeconds) {
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
   useEffect(() => {
@@ -37,7 +37,7 @@ function useCountdown(totalSeconds) {
   return { timeLeft, label: `${mm}:${ss}`, total: totalSeconds };
 }
 
-/* ---------- Screenshot helper (lazy, client-only) ---------- */
+/* ---------- Screenshot helper ---------- */
 async function takeScreenshot(node, fileName = "services-offer.png") {
   try {
     const html2canvas = (await import("html2canvas")).default;
@@ -77,18 +77,16 @@ const cardVariants = {
   }),
 };
 
-/* ---------- Reusable class to pin CTAs to card bottoms ---------- */
-/* Tailwind does the heavy lifting via mt-auto; this class name helps you target it if you ever add custom CSS */
 const CTA_BOTTOM_CLASS = "cta-bottom mt-auto";
 
 export default function Services() {
   const prefersReducedMotion = useReducedMotion();
   const captureRef = useRef(null);
 
-  // 10 minutes = 600 seconds
   const { timeLeft, label } = useCountdown(600);
 
-  const bookingUrl = "https://calendly.com/puri-business7/15min";
+  /* Phone number just for display in text */
+  const phoneNumberDisplay = "647 474 7957";
 
   const services = useMemo(
     () => [
@@ -162,7 +160,7 @@ export default function Services() {
       id="services"
       className="relative overflow-hidden bg-white py-16 sm:py-20"
     >
-      {/* soft red corners */}
+      {/* Background accents */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-100/60 blur-3xl"
@@ -173,7 +171,7 @@ export default function Services() {
       />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
-        {/* ----- Heading row ----- */}
+        {/* Heading */}
         <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <motion.div
             variants={sectionVariants}
@@ -192,7 +190,7 @@ export default function Services() {
           </motion.div>
         </div>
 
-        {/* ----- Screenshot capture area ----- */}
+        {/* Content Grid */}
         <div ref={captureRef}>
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
@@ -205,7 +203,7 @@ export default function Services() {
                 variants={cardVariants}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-red-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
-                {/* Media */}
+                {/* Image */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
                   <Image
                     src={service.image}
@@ -213,7 +211,6 @@ export default function Services() {
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
-                    priority={false}
                   />
                   <div
                     aria-hidden
@@ -221,13 +218,12 @@ export default function Services() {
                   />
                 </div>
 
-                {/* Content */}
+                {/* Text */}
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
                     {service.title}
                   </h3>
 
-                  {/* Price row */}
                   <div className="mt-2 flex flex-wrap items-center gap-2 sm:gap-3">
                     <span className="text-3xl font-extrabold text-red-600">
                       {service.priceNew}
@@ -242,10 +238,7 @@ export default function Services() {
 
                   <p className="mt-3 text-slate-600">{service.description}</p>
 
-                  <ul
-                    className="mt-5 mb-4 space-y-2.5"
-                    aria-label={`${service.title} features`}
-                  >
+                  <ul className="mt-5 mb-4 space-y-2.5">
                     {service.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5">
                         <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-600/10 text-red-600">
@@ -256,19 +249,17 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  {/* CTA pinned at the bottom */}
+                  {/* ---------- CTA: no navigation, just text ---------- */}
                   <div className={CTA_BOTTOM_CLASS}>
-                    <motion.a
-                      href={bookingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <motion.button
+                      type="button"
                       whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
                       whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                       className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      aria-label={`Book ${service.title} (opens Calendly in a new tab)`}
+                      aria-label={`Call ${phoneNumberDisplay} to book`}
                     >
-                      Book Now
-                    </motion.a>
+                      Call ({phoneNumberDisplay}) to book
+                    </motion.button>
                   </div>
                 </div>
               </motion.article>
