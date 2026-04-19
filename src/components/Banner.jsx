@@ -74,6 +74,9 @@ export default function BannerOffer({ seconds = 600 }) {
               <span className="underline decoration-white/60">30% OFF</span>
             </h3>
             <p className="mt-1 text-sm text-white/95 sm:text-base">
+              $20 OFF Total order if 2 vehicles
+            </p>
+            <p className="mt-1 text-sm text-white/95 sm:text-base">
               Book within the next{" "}
               <span className="font-semibold">
                 {mm}:{ss}
@@ -130,7 +133,7 @@ export default function BannerOffer({ seconds = 600 }) {
               className="flex items-center gap-3"
               aria-label="Follow Royal Touch Auto Detailing"
             >
-              <a
+              {/* <a
                 href="https://www.instagram.com/royal_touch.auto.detailing/"
                 target="_blank"
                 rel="noreferrer"
@@ -138,7 +141,7 @@ export default function BannerOffer({ seconds = 600 }) {
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
               >
                 <FaInstagram size={17} />
-              </a>
+              </a> */}
               <a
                 href="https://www.facebook.com/profile.php?id=61563899468930"
                 target="_blank"

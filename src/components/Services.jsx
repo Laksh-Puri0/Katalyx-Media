@@ -92,8 +92,8 @@ export default function Services() {
     () => [
       {
         title: "Royal Premium Interior + Exterior Detail",
-        priceOld: "$250",
-        priceNew: "$180",
+        priceOld: "$280",
+        priceNew: "$215",
         time: "Estimated Time: 3 Hours",
         description:
           "Complete signature package — interior deep clean + exterior gloss & protection for a showroom-level refresh.",
@@ -110,8 +110,8 @@ export default function Services() {
       },
       {
         title: "Royal Premium Interior Detail",
-        priceOld: "$180",
-        priceNew: "$140",
+        priceOld: "$220",
+        priceNew: "$165",
         time: "Estimated Time: 2 Hours",
         description:
           "Cabin restoration with precision cleaning, odor reduction, and conditioning for a like-new feel.",
@@ -126,23 +126,7 @@ export default function Services() {
           "Windows & mirrors",
         ],
       },
-      {
-        title: "Royal Premium Exterior Detail",
-        priceOld: "$100",
-        priceNew: "$70",
-        time: "Estimated Time: 1 Hour",
-        description:
-          "Professional exterior refresh — removes dust & road film, revives gloss, and protects your paint.",
-        image: "/Images/service2.jpg",
-        features: [
-          "Foam wash & hand dry",
-          "Bug/tar removal",
-          "Clean windows & mirrors",
-          "Dress exterior trims",
-          "Light polish (if needed)",
-          "Tire shine application",
-        ],
-      },
+      
     ],
     []
   );
