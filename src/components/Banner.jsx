@@ -40,7 +40,7 @@ export default function BannerOffer({ seconds = 600 }) {
             animate: { y: 0, opacity: 1 },
             transition: { duration: 0.5, ease: "easeOut" },
           },
-    [reduceMotion]
+    [reduceMotion],
   );
 
   const scrollToServices = useCallback((e) => {
@@ -64,7 +64,7 @@ export default function BannerOffer({ seconds = 600 }) {
 
       <motion.div
         {...variants}
-        className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 md:px-8"
+        className="mx-auto w-full max-w-8xl px-4 py-6 sm:px-6 md:px-8"
       >
         <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-white/20 bg-white/10 p-5 text-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] backdrop-blur-md sm:flex-row sm:gap-6">
           {/* Left: Copy */}
@@ -119,7 +119,9 @@ export default function BannerOffer({ seconds = 600 }) {
           </div>
 
           {/* Right: CTA + Socials */}
+          {/* Right: CTA + Phone + Socials */}
           <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+            {/* CTA Button */}
             <a
               href="#services"
               onClick={scrollToServices}
@@ -129,19 +131,20 @@ export default function BannerOffer({ seconds = 600 }) {
               View Packages &amp; Pricing
             </a>
 
+            {/* Tap to Call Button */}
+            <a
+              href="tel:+16474942536"
+              className="inline-flex w-full items-center justify-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:w-auto"
+              aria-label="Call Royal Touch Auto Detailing"
+            >
+              📞 +1 647-494-2536
+            </a>
+
+            {/* Socials */}
             <nav
               className="flex items-center gap-3"
               aria-label="Follow Royal Touch Auto Detailing"
             >
-              {/* <a
-                href="https://www.instagram.com/royal_touch.auto.detailing/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-              >
-                <FaInstagram size={17} />
-              </a> */}
               <a
                 href="https://www.facebook.com/profile.php?id=61563899468930"
                 target="_blank"
