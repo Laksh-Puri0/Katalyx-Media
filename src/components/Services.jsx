@@ -126,16 +126,15 @@ export default function Services() {
           "Windows & mirrors",
         ],
       },
-      
     ],
-    []
+    [],
   );
 
   const handleScreenshot = useCallback(async () => {
     if (!captureRef.current) return;
     await takeScreenshot(
       captureRef.current,
-      `royal-services-${Date.now()}.png`
+      `royal-services-${Date.now()}.png`,
     );
   }, []);
 
@@ -235,15 +234,17 @@ export default function Services() {
 
                   {/* ---------- CTA: no navigation, just text ---------- */}
                   <div className={CTA_BOTTOM_CLASS}>
-                    <motion.button
-                      type="button"
-                      whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
-                      whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
-                      className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      aria-label={`Call ${phoneNumberDisplay} to book`}
-                    >
-                      Call ({phoneNumberDisplay}) to book
-                    </motion.button>
+                    <a href="tel:+16474942536">
+                      <motion.button
+                        type="button"
+                        whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+                        whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+                        className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        aria-label="Call to book"
+                      >
+                       TAP TO CALL
+                      </motion.button>
+                    </a>
                   </div>
                 </div>
               </motion.article>
