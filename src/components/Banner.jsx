@@ -118,7 +118,6 @@ export default function BannerOffer({ seconds = 600 }) {
             </div>
           </div>
 
-          {/* Right: CTA + Socials */}
           {/* Right: CTA + Phone + Socials */}
           <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
             {/* CTA Button */}
@@ -132,12 +131,14 @@ export default function BannerOffer({ seconds = 600 }) {
             </a>
 
             {/* Tap to Call Button */}
-            <a
-              href="tel:+16474942536"
-              className="inline-flex w-full items-center justify-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:w-auto"
-              aria-label="Call Royal Touch Auto Detailing"
-            >
-              📞 +1 647-494-2536
+            <a href="tel:+16474942536">
+              <motion.button
+                type="button"
+                className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-12 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                aria-label="Call to book"
+              >
+                TAP TO CALL
+              </motion.button>
             </a>
 
             {/* Socials */}
