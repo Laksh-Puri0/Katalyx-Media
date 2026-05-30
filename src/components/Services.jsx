@@ -234,7 +234,7 @@ export default function Services() {
 
                   {/* ---------- CTA: no navigation, just text ---------- */}
                   <div className={CTA_BOTTOM_CLASS}>
-                    <a href="tel:+16474942536">
+                    <a href="tel:+16479776959">
                       <motion.button
                         type="button"
                         whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
