@@ -85,8 +85,6 @@ export default function Services() {
 
   const { timeLeft, label } = useCountdown(600);
 
-  /* Phone number just for display in text */
-  const phoneNumberDisplay = "647 474 7957";
 
   const services = useMemo(
     () => [
@@ -234,7 +232,7 @@ export default function Services() {
 
                   {/* ---------- CTA: no navigation, just text ---------- */}
                   <div className={CTA_BOTTOM_CLASS}>
-                    <a href="tel:+16479776959">
+                    <a href="tel:+16473635732">
                       <motion.button
                         type="button"
                         whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
