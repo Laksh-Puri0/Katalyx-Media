@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+
 const Banner = dynamic(() => import("@/components/Banner"), {
   ssr: false,
   loading: () => <SectionSkeleton height={400} />,
@@ -14,6 +15,14 @@ const Gallery = dynamic(() => import("@/components/Gallery"), {
   loading: () => <SectionSkeleton height={500} />,
 });
 const Reviews = dynamic(() => import("@/components/Reviews"), {
+  ssr: false,
+  loading: () => <SectionSkeleton height={400} />,
+});
+const Calendly = dynamic(() => import("@/components/Calendly"), {
+  ssr: false,
+  loading: () => <SectionSkeleton height={400} />,
+});
+const FAQ = dynamic(() => import("@/components/FAQ's"), {
   ssr: false,
   loading: () => <SectionSkeleton height={400} />,
 });
@@ -38,6 +47,8 @@ export default function Page() {
     <div>
       <Banner />
       <Services />
+      <Calendly />
+      <FAQ/>
       <Reviews />
       <Gallery />
     </div>

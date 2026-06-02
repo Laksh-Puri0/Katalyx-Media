@@ -85,7 +85,6 @@ export default function Services() {
 
   const { timeLeft, label } = useCountdown(600);
 
-
   const services = useMemo(
     () => [
       {
@@ -136,6 +135,13 @@ export default function Services() {
     );
   }, []);
 
+  const scrollToCalendly = () => {
+    document.getElementById("calendly").scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <section
       id="services"
@@ -152,6 +158,7 @@ export default function Services() {
       />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
+        
         {/* Heading */}
         <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <motion.div
@@ -232,17 +239,15 @@ export default function Services() {
 
                   {/* ---------- CTA: no navigation, just text ---------- */}
                   <div className={CTA_BOTTOM_CLASS}>
-                    <a href="tel:+16473635732">
-                      <motion.button
-                        type="button"
-                        whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
-                        whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
-                        className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                        aria-label="Call to book"
-                      >
-                       TAP TO CALL
-                      </motion.button>
-                    </a>
+                    <motion.button
+                      onClick={scrollToCalendly}
+                      type="button"
+                      whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+                      whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+                      className="inline-flex w-full items-center justify-center rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                    >
+                      Book Now
+                    </motion.button>
                   </div>
                 </div>
               </motion.article>
